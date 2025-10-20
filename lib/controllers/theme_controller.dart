@@ -16,7 +16,8 @@ class ThemeController extends GetxController{
     Future.delayed(const Duration(milliseconds: 50), (){
       Get.changeThemeMode(_loadTheme()? ThemeMode.light: ThemeMode.dark);
       saveTheme(!_loadTheme());
-    }
+      update();
+    });
   }
 
 }
