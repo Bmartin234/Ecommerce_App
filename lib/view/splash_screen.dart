@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ecommerce_app/view/signin_screen.dart';
 
+
 class SplashScreen extends StatelessWidget {
    SplashScreen({super.key});
   final AuthController authController = Get.find<AuthController>();
@@ -20,7 +21,7 @@ class SplashScreen extends StatelessWidget {
          Get.off(()=> const MainScreen());
        }
        else{
-          Get.off(()=> const SigninScreen());
+          Get.off(()=> SigninScreen());
        }
      });
 
