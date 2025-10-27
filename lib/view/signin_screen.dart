@@ -1,5 +1,9 @@
+import 'package:ecommerce_app/controllers/auth_controller.dart';
 import 'package:ecommerce_app/utils/app_textstyles.dart';
+import 'package:ecommerce_app/view/main_screen.dart';
+import 'package:ecommerce_app/view/sign_up_screen.dart';
 import 'package:ecommerce_app/view/widgets/custom_textfield.dart';
+import 'package:ecommerce_app/view/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,10 +50,10 @@ class SigninScreen extends StatelessWidget {
                 controller: _emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                     'Please enter your email';
+                    return 'Please enter your email';
                   }
                   if (!GetUtils.isEmail(value)) {
-                     'Please enter a valid email';
+                     return 'Please enter a valid email';
                   }
                   return null;
                 },
@@ -66,7 +70,7 @@ class SigninScreen extends StatelessWidget {
                 controller: _passwordController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    'Please enter your password';
+                    return 'Please enter your password';
                   }
                   return null;
                 },
@@ -74,11 +78,11 @@ class SigninScreen extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // forgot password
+              // forgot password textbutton
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(()=> ForgotPasswordScreen()),
                   child: Text(
                     'Forgot Password?',
                     style: AppTextStyle.withColor(
@@ -88,12 +92,70 @@ class SigninScreen extends StatelessWidget {
                   ),
                 ),
               ),
+               const SizedBox(height: 24),
+
+               //singn in button
+
+               SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: _handleSignIn,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                        'Sign In',
+                            style: AppTextStyle.withColor(
+                                AppTextStyle.buttonMedium,
+                              Colors.white,
+                            ),
+
+                    ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              //signup textbutton
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    style: AppTextStyle.withColor(
+                        AppTextStyle.bodyMedium,
+                      isDark ? Colors.grey[400]!: Colors.grey[600]!,
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: () => Get.to(
+                            () => SignUpScreen(),
+                      ),
+                      child: Text(
+                          'Sign Up',
+                        style: AppTextStyle.withColor(
+                          AppTextStyle.buttonMedium,
+                          Theme.of(context).primaryColor,
+                        ),
+                      ),
+                  )
+                ],
+              )
             ],
           ),
         ),
       ),
     );
   }
+  //sign in button onpressed
+void _handleSignIn(){
+    final AuthController authController  = Get.find<AuthController>();
+    authController.login();
+    Get.offAll(()=> const MainScreen());
+}
 }
 
 
