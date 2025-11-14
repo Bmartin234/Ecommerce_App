@@ -30,7 +30,7 @@ class SaleBanner extends StatelessWidget {
                Text(
                  'Special sale',
                  style: AppTextStyle.withColor(
-                   AppTextStyle.withweight(
+                   AppTextStyle.withWeight(
                      AppTextStyle.h2,
                      FontWeight.bold,
                    ),

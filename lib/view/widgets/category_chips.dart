@@ -11,7 +11,7 @@ class CategoryChips extends StatefulWidget {
 
 class _CategoryChipsState extends State<CategoryChips> {
   int selectedIndex = 0;
-  final category = ['All', 'Men', 'Women', 'Girls'];
+  final category = ['All', 'Men', 'Women', 'Child', 'Women', 'Child', 'Women', 'Child'];
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _CategoryChipsState extends State<CategoryChips> {
                       category[index],
                       style: AppTextStyle.withColor(
                         selectedIndex == index
-                            ? AppTextStyle.withweight(AppTextStyle.bodySmall,
+                            ? AppTextStyle.withWeight(AppTextStyle.bodySmall,
                           FontWeight.w600,
                         ): AppTextStyle.bodySmall,
                         selectedIndex  == index ? Colors.white :

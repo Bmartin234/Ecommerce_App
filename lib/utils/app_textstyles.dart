@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import "package:ecommerce_app/lib/view/widget/prodcut_card.dart";
 
 class AppTextStyle {
   static TextStyle h1 = GoogleFonts.poppins(
@@ -61,7 +62,7 @@ class AppTextStyle {
      return style.copyWith(color: color);
    }
    //
-static TextStyle withweight(TextStyle style, FontWeight weight){
+static TextStyle withWeight(TextStyle style, FontWeight weight){
      return style.copyWith(fontWeight: weight);
 
 }

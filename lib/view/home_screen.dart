@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import 'all_products_screen.dart';
+import 'cart_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen ({super.key});
 
@@ -57,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   //cart button
                   IconButton(
-                    onPressed: (){},
+                    onPressed: () => Get.to(()=> const CartScreen()),
                     icon: Icon(Icons.shopping_bag_outlined),
                   ),
 
@@ -99,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () => Get.to(()=> AllProductsScreen()),
                     child: Text(
                       'See All',
                       style:  TextStyle(
