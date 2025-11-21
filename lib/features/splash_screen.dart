@@ -1,9 +1,10 @@
 import 'package:ecommerce_app/controllers/auth_controller.dart';
-import 'package:ecommerce_app/view/main_screen.dart';
-import 'package:ecommerce_app/view/onboarding_screen.dart';
+import 'package:ecommerce_app/features/signin_screen.dart';
+import 'package:ecommerce_app/features/main_screen.dart';
+import 'package:ecommerce_app/features/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ecommerce_app/view/signin_screen.dart';
+//import 'package:ecommerce_app/view/signin_screen.dart';
 
 
 class SplashScreen extends StatelessWidget {

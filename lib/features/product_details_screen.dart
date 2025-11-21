@@ -1,7 +1,7 @@
-
+import 'package:ecommerce_app/features/widgets/size_selector.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/utils/app_textstyles.dart';
-import 'package:ecommerce_app/view/widgets/size_selector.dart';
+//import 'package:ecommerce_app/view/widgets/size_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

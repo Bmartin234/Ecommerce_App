@@ -1,8 +1,10 @@
 
+import 'package:ecommerce_app/features/widgets/filter_buttom_sheet.dart';
+import 'package:ecommerce_app/features/widgets/product_grid.dart';
 import 'package:ecommerce_app/utils/app_textstyles.dart';
-import 'package:ecommerce_app/view/widgets/product_grid.dart';
+//import 'package:ecommerce_app/view/widgets/product_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/view/widgets/filter_buttom_sheet.dart';
+//import 'package:ecommerce_app/view/widgets/filter_buttom_sheet.dart';
 import 'package:get/get.dart';
 
 class AllProductsScreen extends StatelessWidget {

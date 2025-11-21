@@ -2,7 +2,7 @@ import 'package:ecommerce_app/controllers/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ecommerce_app/view/main_screen.dart';
+import 'package:ecommerce_app/features/main_screen.dart';
 
 class CustomBottomNavbar extends StatelessWidget {
   const CustomBottomNavbar({super.key});

@@ -1,12 +1,12 @@
-
-
+import 'package:ecommerce_app/features/widgets/product_card.dart';
+import 'package:ecommerce_app/features/widgets/product_details_screen.dart';
 import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/view/widgets/product_card.dart';
+//import 'package:ecommerce_app/view/widgets/product_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/scroll_view.dart';
-import 'package:ecommerce_app/view/widgets/product_details_screen.dart';
+//import 'package:ecommerce_app/view/widgets/product_details_screen.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({super.key});
