@@ -5,7 +5,13 @@ import 'package:ecommerce_app/utils/app_textstyles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:share_plus/share_plus.dart';
+//import 'package:ecommerce_app/lib/features/cart_screen.dart';
+
+import '../../controllers/cart_controller.dart';
+import '../cart_screen.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final Products product;
@@ -17,6 +23,7 @@ class ProductDetailsScreen extends StatelessWidget {
     final screenHeight = screenSize.height;
     final screenWidth = screenSize.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final CartController cartController = Get.find<CartController>();
     
     return Scaffold(
       appBar: AppBar(
@@ -134,7 +141,8 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   Text(
-                    'Description',
+                    "Description AMD Ryzen 7 7700X ProcessorThis high-performance gaming PC features top-tier components for excellent gaming and multitasking. At its heart is the AMD Ryzen 7 7700X processor, with 8 cores and 16 threads, ensuring rapid performance. It pairs seamlessly with the MSI B650M PROJECT ZERO m-ATX motherboard, which supports PCIe 5.0 and DDR5 memory, providing robust connectivity and reliable power delivery. The build includes 16GB of Corsair VENGEANCE DDR5 RAM running at 6000MHz for smooth multitasking, and a Western Digital SN7100 1TB NVMe PCIe Gen 4.0 SSD for rapid storage access. "
+                        "Graphics are handled by the MSI GeForce RTX 3060 VENTUS 2X OC with 12GB of memory, delivering stunning visuals and smooth gameplay. Cooling is managed by the Corsair NAUTILUS 240 RS ARGB 240mm Liquid CPU Cooler, ensuring efficient heat management. All components are housed in the sleek MSI MAG PANO M100R PZ Micro- ATX Tower Gaming Case, which offers excellent airflow and space for expansion. Power is supplied by the MSI MAG A750GL PCIE5 750W 80 Plus Gold Full Modular Power Supply, ensuring reliable and efficient power delivery with low noise. This combination of advanced components makes for a powerful and responsive gaming PC suitable for high-performance tasks and immersive gaming experiences.",
                     style: AppTextStyle.withColor(
                       AppTextStyle.bodySmall,
                       Theme.of(context).textTheme.bodyLarge!.color!,
@@ -153,7 +161,20 @@ class ProductDetailsScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    cartController.addToCart(product);
+
+                    // 🟢 তারপর ইউজারকে একটি মেসেজ দিন (অপশনাল কিন্তু ভালো)
+                    Get.snackbar(
+                      'Success',
+                      '${product.name} added to cart!',
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                      duration: const Duration(seconds: 1),
+                    );
+                    Get.to(() =>  CartScreen());
+                  },
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                       vertical: screenHeight * 0.02,
@@ -182,7 +203,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   child: Text(
-                    'Buy Now',
+                    'Order Now',
                     style: AppTextStyle.withColor(
                       AppTextStyle.buttonMedium,
                     Colors.white,

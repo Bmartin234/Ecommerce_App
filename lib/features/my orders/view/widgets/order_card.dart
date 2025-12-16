@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_app/features/my%20orders/model/order.dart';
 import 'package:get/get.dart';
 import '../../../../utils/app_textstyles.dart';
+import '../screens/order_details_screen.dart';
 
 class OrderCard extends StatelessWidget {
   final Order order;
@@ -23,9 +24,7 @@ class OrderCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: isDark
-                ? Colors.black.withOpacity(0.2)
-                : Colors.grey.withOpacity(0.1),
+            color: isDark ? Colors.black.withOpacity(0.2) : Colors.grey.withOpacity(0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -37,38 +36,14 @@ class OrderCard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      image: AssetImage(order.imageUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                Image.asset(order.imageUrl, width: 80, height: 80, fit: BoxFit.cover),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Order #${order.orderNumber}',
-                        style: AppTextStyle.withColor(
-                          AppTextStyle.h3,
-                          Theme.of(context).textTheme.bodyLarge!.color!,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '${order.itemCount} items • \$${order.totalAmount.toStringAsFixed(2)}',
-                        style: AppTextStyle.withColor(
-                          AppTextStyle.bodyMedium,
-                          isDark ? Colors.grey[400]! : Colors.grey[600]!,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
+                      Text('Order #${order.orderNumber}', style: AppTextStyle.h3),
+                      Text('\$${order.totalAmount.toStringAsFixed(2)}', style: AppTextStyle.bodyMedium),
                       _buildStatusChip(context, order.statusString),
                     ],
                   ),
@@ -76,18 +51,11 @@ class OrderCard extends StatelessWidget {
               ],
             ),
           ),
-          Divider(height: 1, color: Colors.grey.shade200),
           InkWell(
-            onTap: onViewDetails,
+            onTap: () => Get.to(() => OrderDetailsScreen(order: order)),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                'View Details',
-                style: AppTextStyle.withColor(
-                  AppTextStyle.buttonMedium,
-                  Theme.of(context).primaryColor,
-                ),
-              ),
+              child: Text('View Details', style: TextStyle(color: Theme.of(context).primaryColor)),
             ),
           ),
         ],
@@ -96,32 +64,11 @@ class OrderCard extends StatelessWidget {
   }
 
   Widget _buildStatusChip(BuildContext context, String type) {
-    Color getStatusColor() {
-      switch (type) {
-        case 'active':
-          return Colors.blue;
-        case 'completed':
-          return Colors.green;
-        case 'cancelled':
-          return Colors.red;
-        default:
-          return Colors.grey;
-      }
-    }
-
+    Color color = type == 'active' ? Colors.blue : (type == 'completed' ? Colors.green : Colors.red);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      decoration: BoxDecoration(
-        color: getStatusColor().withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        type.capitalize!,
-        style: AppTextStyle.withColor(
-          AppTextStyle.bodySmall,
-          getStatusColor(),
-        ),
-      ),
+      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+      child: Text(type.capitalize!, style: TextStyle(color: color, fontSize: 12)),
     );
   }
 }

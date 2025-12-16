@@ -1,41 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-//import 'package:flutter/foundation.dart';
 import 'package:ecommerce_app/controllers/theme_controller.dart';
 import 'package:ecommerce_app/features/widgets/category_chips.dart';
 import 'package:ecommerce_app/features/widgets/custom_search_bar.dart';
 import 'package:ecommerce_app/features/widgets/product_grid.dart';
 import 'package:ecommerce_app/features/widgets/sale_banner.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'all_products_screen.dart';
 import 'cart_screen.dart';
 import 'notifications/view/notifications_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen ({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
-            //header section
+            /// ================= HEADER =================
             Padding(
-              padding: EdgeInsets.all(16),
-
+              padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 20,
-                    backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                    backgroundImage:
+                    AssetImage('assets/images/avatar.jpg'),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
                         'Hello Alex',
                         style: TextStyle(
@@ -43,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                           fontSize: 14,
                         ),
                       ),
-
                       Text(
                         'Good Morning',
                         style: TextStyle(
@@ -53,41 +52,51 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  //notification icon
+
+                  const Spacer(),
+
+                  /// -------- Notification ----------
                   IconButton(
-                      onPressed: () => Get.to(() => NotificationsScreen()),
-                      icon: Icon(Icons.notifications_outlined),
-                  ),
-                  //cart button
-                  IconButton(
-                    onPressed: () => Get.to(()=> const CartScreen()),
-                    icon: Icon(Icons.shopping_bag_outlined),
+                    onPressed: () =>
+                        Get.to(() => NotificationsScreen()),
+                    icon: const Icon(Icons.notifications_outlined),
                   ),
 
-                  //theme button
+                  /// -------- Cart ----------
+                  IconButton(
+                    onPressed: () =>
+                        Get.to(() => CartScreen()),
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                  ),
+
+                  /// -------- Theme Toggle ----------
                   GetBuilder<ThemeController>(
-                      builder: (controller) => IconButton(
-                          onPressed: (){},
-                          icon: Icon(
-                            controller.isDarkMode ? Icons.light_mode
-                                : Icons.dark_mode,
-                          ),
-                      )
+                    builder: (controller) => IconButton(
+                      onPressed: () {
+                        controller.toggleTheme(); //
+                      },
+                      icon: Icon(
+                        controller.isDarkMode
+                            ? Icons.light_mode
+                            : Icons.dark_mode,
+                      ),
                     ),
-
-                  //theme button
+                  ),
                 ],
               ),
             ),
-            // search bar
+
+            /// ================= SEARCH =================
             const CustomSearchBar(),
-            //category chips
+
+            /// ================= CATEGORY =================
             const CategoryChips(),
-            // sale banner
+
+            /// ================= SALE BANNER =================
             const SaleBanner(),
-            //popular product
-             Padding(
+
+            /// ================= POPULAR PRODUCT TITLE =================
+            Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 8,
@@ -95,7 +104,7 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Popular Product',
                     style: TextStyle(
                       fontSize: 18,
@@ -103,10 +112,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Get.to(()=> AllProductsScreen()),
+                    onTap: () =>
+                        Get.to(() => const AllProductsScreen()),
                     child: Text(
                       'See All',
-                      style:  TextStyle(
+                      style: TextStyle(
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
@@ -114,9 +124,11 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            //product grid
 
-            const Expanded(child: ProductGrid()),
+            /// ================= PRODUCT GRID =================
+            const Expanded(
+              child: ProductGrid(),
+            ),
           ],
         ),
       ),

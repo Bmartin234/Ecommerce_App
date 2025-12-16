@@ -4,27 +4,49 @@ import 'package:ecommerce_app/features/main_screen.dart';
 import 'package:ecommerce_app/features/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:ecommerce_app/view/signin_screen.dart';
 
 
-class SplashScreen extends StatelessWidget {
-   SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key}); // Added const for consistency
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  // Use Get.find to retrieve the AuthController instance
   final AuthController authController = Get.find<AuthController>();
 
   @override
+  void initState(){
+    super.initState();
+    _initializeApp();
+  }
+
+  // 🎯 CORRECTED NAVIGATION LOGIC in initState
+  void _initializeApp() async {
+    // Wait for 2.5 seconds to show the splash screen animation
+    await Future.delayed(const Duration(milliseconds: 2500));
+
+    // Check the authentication state and navigate accordingly
+    if (authController.isFirstTime) {
+      // Navigate to Onboarding for first-time users
+      Get.off(() => const OnboardingScreen());
+    }
+    else if (authController.isLoggedIn) {
+      // Navigate to MainScreen for logged-in users (CORRECTED from OnboardingScreen)
+      Get.off(() => const MainScreen());
+    }
+    else {
+      // Navigate to SignInScreen for logged-out users who are not first-time users
+      Get.off(() => SigninScreen()); // Added const since SignInScreen likely doesn't have mutable fields
+    }
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    //navigate based on auth state after 2.5 sseconds
-     Future.delayed(const Duration(milliseconds: 2500),(){
-       if(authController.isFirstTime){
-          Get.off(()=> const OnboardingScreen());
-       }
-       else if(authController.isLoggedIn){
-         Get.off(()=> const MainScreen());
-       }
-       else{
-          Get.off(()=> SigninScreen());
-       }
-     });
+    // The commented-out navigation logic is removed as it's correctly placed in initState.
 
     return Scaffold(
       body: Container(
@@ -35,6 +57,8 @@ class SplashScreen extends StatelessWidget {
               Theme.of(context).primaryColor.withOpacity(0.8),
               Theme.of(context).primaryColor.withOpacity(0.6),
             ],
+            begin: Alignment.topLeft, // Added begin/end for a clearer gradient
+            end: Alignment.bottomRight,
           ),
         ),
         child: Stack(
@@ -127,7 +151,7 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
 
-            // 🔹 Your original Positioned tagline part
+            // Tagline part
             Positioned(
               bottom: 48,
               left: 0,
@@ -160,7 +184,7 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-// 🔹 Background grid pattern widget
+// 🔹 Background grid pattern widget (Unchanged)
 class GridPattern extends StatelessWidget {
   final Color color;
   const GridPattern({Key? key, required this.color}) : super(key: key);
@@ -173,7 +197,7 @@ class GridPattern extends StatelessWidget {
   }
 }
 
-// 🔹 Custom painter for grid pattern
+// 🔹 Custom painter for grid pattern (Unchanged)
 class GridPainter extends CustomPainter {
   final Color color;
   const GridPainter({required this.color});
@@ -199,8 +223,6 @@ class GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-
-
 
 
 

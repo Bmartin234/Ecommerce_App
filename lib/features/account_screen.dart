@@ -1,10 +1,13 @@
 import 'package:ecommerce_app/features/my%20orders/view/screens/my_orders_screen.dart';
 import 'package:ecommerce_app/features/settings_screen.dart';
+import 'package:ecommerce_app/features/shipping_address_screen.dart';
 import 'package:ecommerce_app/features/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
 import '../utils/app_textstyles.dart';
+import 'edit profile/screens/edit_profile_screen.dart';
+import 'help center/views/screen/help_center_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -86,7 +89,7 @@ class AccountScreen extends StatelessWidget {
 
           /// EDIT PROFILE BUTTON
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () => Get.to(() => EditProfileScreen()),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               side: BorderSide(
@@ -160,9 +163,9 @@ class AccountScreen extends StatelessWidget {
                 } else if (item['title'] == 'My Orders') {
                   Get.to(() => MyOrdersScreen());
                 } else if (item['title'] == 'Shipping Address') {
-                  // TODO: navigation
+                  Get.to(() => ShippingAddressScreen());
                 } else if (item['title'] == 'Help Center') {
-                  // TODO: navigation
+                  Get.to(() => HelpCenterScreen());
                 }
               },
             ),
@@ -244,10 +247,10 @@ class AccountScreen extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      final AuthController authController =
-                      Get.find<AuthController>();
-                      authController.logout();
-                      Get.offAll(() => SigninScreen());
+                      // final AuthController authController =
+                      // Get.find<AuthController>();
+                      // authController.logout();
+                      // Get.offAll(() => SigninScreen());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
